@@ -10,16 +10,26 @@ import json
 import argparse
 from github import Github
 
+import logging
+
 
 def comment_pr(repo_token, filename):
     file = open(filename, encoding='utf-8')
     message = file.read()
     message = message.encode("ascii", "ignore").decode('utf-8')
 
+    logging.info(message)
+    print(message)
+
     g = Github(repo_token)
     repo = g.get_repo(os.getenv('GITHUB_REPOSITORY'))
+    logging.info(repo)
+    print(repo)
     event_payload = open(os.getenv('GITHUB_EVENT_PATH')).read()
     json_payload =  json.loads(event_payload)
+    logging.info(json_payload)
+    print(json_payload)
+    
     if json_payload.get('number') is not None:
         pr = repo.get_pull(json_payload.get('number'))
         pr.create_issue_comment("```" + message + "```")
