@@ -17,6 +17,8 @@ RUN pip install pandas-gbq
 RUN pip install pytest
 RUN pip install PyGithub
 
+RUN pip install virtualenv
+
 RUN mkdir /action
 COPY dag_validation.py /action/dag_validation.py
 COPY alert.py /action/alert.py
