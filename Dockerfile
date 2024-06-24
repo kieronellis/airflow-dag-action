@@ -1,9 +1,9 @@
-FROM python:3.11.8
+FROM python:3.11
 
 RUN python -m venv /opt/venv
 
 # Install airflow
-ENV PYTHON_VERSION 3.11.8
+ENV PYTHON_VERSION 3.11
 ENV AIRFLOW_VERSION=2.7.3
 RUN pip install --upgrade pip
 ENV CONSTRAINT_URL "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
