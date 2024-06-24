@@ -79,6 +79,7 @@ virtual_env = PythonVirtualenvOperator(
             "apache-airflow-providers-google==5.0.0",
             "Lifetimes==0.11.3",
         ],
+        dag=dag,
     )
 
 BaseHook.get_connection("test_conn")
