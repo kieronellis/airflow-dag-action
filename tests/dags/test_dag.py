@@ -20,7 +20,7 @@ DAG_ID = "test_dag"
 default_args = {
     'owner' : 'DE',
     'depends_on_past' : False,
-    'start_date' : datetime.today().replace(hour=0, minute=0, second=0, microsecond=0),
+    'start_date': datetime(2021, 8, 11),
     'email' : ['example@123.com'],
     'email_on_failure' : False,
     'email_on_retry' : False,
@@ -82,6 +82,7 @@ virtual_env = PythonVirtualenvOperator(
     )
 
 BaseHook.get_connection("test_conn")
+
 access_var >> import_module >> virtual_env
 
 # r_value = '{"foo": "bar"\n, "buzz": 2}'
