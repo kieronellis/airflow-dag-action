@@ -10,7 +10,7 @@ from airflow.operators.python import PythonVirtualenvOperator
 from shared_var import image
 import numpy as np
 import pandas as pd
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from common.utils import days_ago # from plugins directory
 
@@ -20,7 +20,7 @@ DAG_ID = "test_dag"
 default_args = {
     'owner' : 'DE',
     'depends_on_past' : False,
-    'start_date' : days_ago(0),
+    'start_date' : datetime.today().replace(hour=0, minute=0, second=0, microsecond=0),
     'email' : ['example@123.com'],
     'email_on_failure' : False,
     'email_on_retry' : False,
@@ -81,7 +81,7 @@ virtual_env = PythonVirtualenvOperator(
         ],
     )
 
-
+BaseHook.get_connection("test_conn")
 access_var >> import_module >> virtual_env
 
 # r_value = '{"foo": "bar"\n, "buzz": 2}'
@@ -100,5 +100,5 @@ access_var >> import_module >> virtual_env
 #                 log_events_on_failure=True,
 #                 dag=dag
 #             )
-# BaseHook.get_connection("test_conn")
+
 # access_var >> import_module >> k8s_image
