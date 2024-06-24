@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.11-slim
 
 RUN python -m venv /opt/venv
 
@@ -15,7 +15,7 @@ RUN pip install google-auth-httplib2
 RUN pip install google-api-python-client
 RUN pip install pandas-gbq
 RUN pip install pytest
-RUN pip install PyGithub==1.55
+RUN pip install PyGithub
 
 RUN mkdir /action
 COPY dag_validation.py /action/dag_validation.py

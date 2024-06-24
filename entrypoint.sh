@@ -12,10 +12,12 @@ pip install -r $1
 
 export AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS="False"
 
-airflow db init
+airflow db migrate
+if [ "$AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS" = "True" ]; then
+    airflow connections create-default-connections
+fi
 airflow variables import $3
 airflow connections import $4
-
 
 cp -r /action/* /github/workspace/
 
